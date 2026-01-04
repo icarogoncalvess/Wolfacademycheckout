@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wolf Academy - Mentoria de Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Bebas+Neue&family=Roboto:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: #050814;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        
+        /* Cores principais */
+        :root {
+            --bg-dark: #050814;
+            --bg-section: #0b1024;
+            --gold: #d4af37;
+            --gold-soft: #f4e5a1;
+            --accent: #1f3b6b;
+            --text-muted: #c4c4c4;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            background: radial-gradient(circle at top, #203d72 0%, #050814 55%, #000000 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url('https://placehold.co/1600x900/e0c887/050814?text=Wolf+of+Wall+Street+Vibes') center/cover;
+            opacity: 0.18;
+            z-index: 0;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at top, rgba(0,0,0,0.15), rgba(0,0,0,0.9));
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            padding: 20px;
+        }
+        
+        .logo {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 4.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: 10px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-soft) 50%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
+        }
+        
+        .hero-tag {
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            color: var(--gold-soft);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .hero h1 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 3.3rem;
+            font-weight: 700;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            text-transform: uppercase;
+            color: #ffffff;
+            text-shadow: 3px 3px 20px rgba(0,0,0,0.9);
+        }
+        
+        .hero .subtitle {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 40px;
+            color: var(--gold-soft);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.9);
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-soft) 50%, var(--gold) 100%);
+            color: #050814;
+            font-size: 1.3rem;
+            font-weight: 800;
+            text-decoration: none;
+            border-radius: 999px;
+            transition: all 0.3s ease;
+            box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-family: 'Oswald', sans-serif;
+            border: 2px solid #f7f2d0;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+            filter: brightness(1.05);
+        }
+        
+        .hero-note {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* SEÇÕES GENERAIS */
+        .section {
+            padding: 90px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-soft) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 4px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 640px;
+            margin: 0 auto 45px;
+        }
+        
+        .problem-section {
+            background: radial-gradient(circle at top, #1e2c4f 0%, #050814 55%);
+        }
+        
+        .problem-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .problem-card {
+            background: rgba(3, 6, 20, 0.85);
+            border: 1px solid rgba(244, 229, 161, 0.22);
+            padding: 35px;
+            border-radius: 18px;
+            text-align: left;
+            transition: all 0.3s ease;
+            box-shadow: 0 18px 40px rgba(0,0,0,0.6);
+        }
+        
+        .problem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9);
+            border-color: var(--gold);
+        }
+        
+        .problem-card h3 {
+            font-size: 1.4rem;
+            color: var(--gold-soft);
+            margin-bottom: 12px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+        
+        .problem-card p {
+            font-size: 1rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+        
+        .problem-highlight {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .problem-highlight h3 {
+            font-size: 1.9rem;
+            color: var(--gold-soft);
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .problem-highlight p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+        }
+
+        /* PILARES */
+        .pillars-section {
+            background: linear-gradient(145deg, #050814 0%, #0f1735 45%, #050814 100%);
+        }
+        
+        .pillars-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 35px;
+        }
+        
+        .pillar-card {
+            background: radial-gradient(circle at top, rgba(244, 229, 161, 0.08), rgba(5,8,20,0.95));
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: left;
+            border: 1px solid rgba(244, 229, 161, 0.26);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pillar-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(244, 229, 161, 0.15), transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .pillar-card:hover::before {
+            opacity: 1;
+        }
+        
+        .pillar-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 70px rgba(0,0,0,0.9);
+        }
+        
+        .pillar-label {
+            font-size: 0.9rem;
+            color: var(--gold-soft);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 8px;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .pillar-card h3 {
+            position: relative;
+            z-index: 1;
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin-bottom: 18px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+        
+        .pillar-card ul {
+            position: relative;
+            z-index: 1;
+            list-style: none;
+        }
+        
+        .pillar-card li {
+            font-size: 1rem;
+            margin-bottom: 14px;
+            padding-left: 26px;
+            position: relative;
+            color: var(--text-muted);
+        }
+        
+        .pillar-card li::before {
+            content: '•';
+            position: absolute;
+            left: 8px;
+            top: -2px;
+            color: var(--gold-soft);
+            font-size: 1.3rem;
+        }
+
+        /* TRANSFORMAÇÃO */
+        .transformation-section {
+            background: radial-gradient(circle at top, #1e305b 0%, #050814 50%, #000000 100%);
+        }
+        
+        .transformation-content {
+            display: grid;
+            grid-template-columns: 1.1fr 1fr;
+            gap: 55px;
+            align-items: center;
+        }
+        
+        .transformation-image {
+            width: 100%;
+            border-radius: 18px;
+            box-shadow: 0 28px 80px rgba(0,0,0,0.9);
+            border: 1px solid rgba(244, 229, 161, 0.45);
+            background: url('https://placehold.co/900x600/12294b/f9f2cc?text=Lifestyle+Rico+Wolf+Academy') center/cover;
+            min-height: 260px;
+        }
+        
+        .transformation-text h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.5rem;
+            color: var(--gold-soft);
+            margin-bottom: 18px;
+            letter-spacing: 3px;
+        }
+        
+        .transformation-text p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            margin-bottom: 18px;
+            color: var(--text-muted);
+        }
+        
+        .transformation-bullets {
+            margin-top: 10px;
+            color: var(--gold-soft);
+            font-weight: 600;
+            line-height: 1.7;
+        }
+
+        /* BADGES / GARANTIA */
+        .guarantee-section {
+            background: #050814;
+            text-align: center;
+        }
+        
+        .badges {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            margin: 40px 0 50px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .badge-icon {
+            font-size: 2.5rem;
+            color: var(--gold-soft);
+        }
+        
+        .badge-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 180px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .guarantee-box {
+            background: radial-gradient(circle at top, rgba(244, 229, 161, 0.18), #050814);
+            border: 1px solid rgba(244, 229, 161, 0.6);
+            color: #ffffff;
+            padding: 50px 40px;
+            border-radius: 22px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.9);
+        }
+        
+        .guarantee-box h3 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 2.4rem;
+            margin-bottom: 20px;
+            color: var(--gold-soft);
+            letter-spacing: 3px;
+        }
+        
+        .guarantee-box p {
+            font-size: 1.05rem;
+            line-height: 1.9;
+            color: var(--text-muted);
+        }
+
+        /* OFERTA / PREÇO */
+        .price-section {
+            background: radial-gradient(circle at top, #1f315e 0%, #050814 55%, #000000 100%);
+            text-align: center;
+        }
+        
+        .price-box {
+            background: radial-gradient(circle at top, rgba(244,229,161,0.15), rgba(5,8,20,0.95));
+            border: 1px solid rgba(244, 229, 161, 0.7);
+            padding: 55px 35px;
+            border-radius: 22px;
+            max-width: 620px;
+            margin: 0 auto 40px;
+            box-shadow: 0 25px 70px rgba(0,0,0,0.9);
+        }
+        
+        .old-price {
+            font-size: 1.4rem;
+            text-decoration: line-through;
+            color: #777;
+            margin-bottom: 6px;
+            font-family: 'Oswald', sans-serif;
+        }
+        
+        .new-price {
+            font-size: 4rem;
+            font-weight: 900;
+            color: var(--gold-soft);
+            font-family: 'Bebas Neue', cursive;
+            margin-bottom: 8px;
+            text-shadow: 0 0 24px rgba(244, 229, 161, 0.5);
+            letter-spacing: 4px;
+        }
+        
+        .price-tagline {
+            font-size: 1rem;
+            color: var(--gold-soft);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .price-subtitle {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+        
+        .urgency {
+            background: rgba(178, 34, 34, 0.25);
+            border: 1px solid #ff6666;
+            padding: 18px;
+            border-radius: 14px;
+            margin-top: 22px;
+            font-size: 1rem;
+            color: #ffaaaa;
+            font-weight: 600;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .secure-text {
+            font-size: 0.95rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: #050814;
+        }
+        
+        .faq-item {
+            background: #0b1024;
+            border-left: 4px solid var(--gold-soft);
+            padding: 25px 28px;
+            margin-bottom: 18px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.7);
+        }
+        
+        .faq-item h3 {
+            color: var(--gold-soft);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-family: 'Oswald', sans-serif;
+            text-transform: uppercase;
+        }
+        
+        .faq-item p {
+            font-size: 1rem;
+            line-height: 1.85;
+            color: var(--text-muted);
+        }
+        
+        /* CTA FINAL */
+        .final-cta {
+            background: radial-gradient(circle at top, #1f315e 0%, #050814 55%);
+            text-align: center;
+            padding: 110px 20px 120px;
+        }
+        
+        .final-cta h2 {
+            font-family: 'Bebas Neue', cursive;
+            font-size: 3.5rem;
+            margin-bottom: 26px;
+            color: var(--gold-soft);
+            letter-spacing: 6px;
+        }
+        
+        .final-cta p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin-inline: auto;
+        }
+        
+        /* RESPONSIVO */
+        @media (max-width: 900px) {
+            .hero {
+                padding: 40px 15px;
+            }
+            .hero h1 {
+                font-size: 2.4rem;
+            }
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+            .logo {
+                font-size: 3rem;
+                letter-spacing: 6px;
+            }
+            .transformation-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .section {
+                padding: 70px 16px;
+            }
+            .section-title {
+                font-size: 2.4rem;
+            }
+            .new-price {
+                font-size: 3.2rem;
+            }
+            .cta-button {
+                padding: 18px 35px;
+                font-size: 1.05rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="logo">WOLF ACADEMY</div>
+            <div class="hero-tag">MENTORIA DE ELITE PARA HOMENS QUE QUEREM SAIR DA MÉDIA</div>
+            <h1>Domine Corpo, Mente e Dinheiro e Vire o Lobo da Sua Própria Vida</h1>
+            <p class="subtitle">Um método direto, prático e sem romantização. Você entra mediano e sai em outro nível de disciplina, estética e lucro.</p>
+            <a href="#oferta" class="cta-button">QUERO ENTRAR AGORA</a>
+            <p class="hero-note">Vagas limitadas para manter o acompanhamento próximo.</p>
+        </div>
+    </section>
+
+    <!-- PROBLEMAS -->
+    <section class="section problem-section">
+        <h2 class="section-title">VOCÊ ESTÁ CANSADO DE SER MEDIANO?</h2>
+        <p class="section-subtitle">Se você sente que poderia estar muito mais à frente, mas sempre volta para os mesmos hábitos fracos, essa página é para você.</p>
+        <div class="problem-grid">
+            <div class="problem-card">
+                <h3>🚫 CORPO FRACO</h3>
+                <p>Você olha no espelho e não gosta do que vê. Falta presença, falta respeito, falta energia para encarar o dia com confiança.</p>
+            </div>
+            <div class="problem-card">
+                <h3>🚫 MENTE FRACA</h3>
+                <p>Procrastinação, falta de foco, autossabotagem. Você sabe o que tem que fazer, mas sempre arruma um jeito de adiar.</p>
+            </div>
+            <div class="problem-card">
+                <h3>🚫 BOLSO VAZIO</h3>
+                <p>Dependência dos pais ou de um salário que mal paga as contas. Zero plano de liberdade financeira, só sobrevivência.</p>
+            </div>
+        </div>
+        <div class="problem-highlight">
+            <h3>É EXATAMENTE ESSE CICLO QUE A WOLF ACADEMY VAI QUEBRAR.</h3>
+            <p>Aqui você aprende, executa e é cobrado. Nada de curso “motivacional” que não muda sua vida em nada.</p>
+        </div>
+    </section>
+
+    <!-- PILARES -->
+    <section class="section pillars-section">
+        <h2 class="section-title">OS 3 PILARES DA SUA NOVA VERSÃO</h2>
+        <p class="section-subtitle">A Wolf Academy foi construída em cima de três fundações: Estética, Mente e Lucro. Se esses pilares estiverem fortes, o resto da sua vida acompanha.</p>
+        <div class="pillars-grid">
+            <div class="pillar-card">
+                <div class="pillar-label">PILAR 01</div>
+                <h3>FÍSICO DE RESPEITO</h3>
+                <ul>
+                    <li>Treinos práticos para iniciante e intermediário (sem frescura de influencer).</li>
+                    <li>Estrutura de treino para ganhar massa e depois secar, mantendo volume.</li>
+                    <li>Guia de dieta acessível: arroz, ovo, frango – nada de coisa impossível de manter.</li>
+                    <li>Um corpo que fala por você antes mesmo de você abrir a boca.</li>
+                </ul>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-label">PILAR 02</div>
+                <h3>MENTE DE LOBO</h3>
+                <ul>
+                    <li>Fim da procrastinação: sistema de micro‑metas diárias e blocos de foco.</li>
+                    <li>Rotina enxuta para manter disciplina mesmo em dias ruins.</li>
+                    <li>Identidade forte: você para de “fingir” que é disciplinado e passa a ser.</li>
+                    <li>Mentalidade de execução: menos conversa, mais ação no mundo real.</li>
+                </ul>
+            </div>
+            <div class="pillar-card">
+                <div class="pillar-label">PILAR 03</div>
+                <h3>LUCRO NA INTERNET</h3>
+                <ul>
+                    <li>Como começar a ganhar de R$ 1.000 a R$ 3.000 online do zero.</li>
+                    <li>Estratégias reais de conteúdo, oferta e construção de audiência.</li>
+                    <li>Noções de responsabilidade financeira para não torrar o que ganhar.</li>
+                    <li>Plano para sair da dependência e construir liberdade a médio prazo.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRANSFORMAÇÃO -->
+    <section class="section transformation-section">
+        <h2 class="section-title">A VIDA QUE VOCÊ COMEÇA A CONSTRUIR AQUI</h2>
+        <div class="transformation-content">
+            <div class="transformation-image"></div>
+            <div class="transformation-text">
+                <h3>DE ESPECTADOR PARA PROTAGONISTA</h3>
+                <p><strong>Imagine acordar sabendo exatamente o que fazer:</strong> treino definido, tarefas claras, plano de grana em andamento. Sem aquela sensação de estar perdido.</p>
+                <p>Na Wolf Academy você não recebe só aulas. Você recebe <strong>um caminho</strong>: passo a passo, com metas semanais e cobrança para você realmente sair do papel.</p>
+                <p class="transformation-bullets">
+                    ✓ Aulas diretas, sem enrolação<br>
+                    ✓ Materiais de apoio (e‑books, apresentações, checklists)<br>
+                    ✓ Comunidade de homens que pensam como você<br>
+                    ✓ Suporte e acompanhamento durante a jornada
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GARANTIA / BADGES -->
+    <section class="section guarantee-section">
+        <h2 class="section-title">SEGURANÇA TOTAL PARA VOCÊ ENTRAR</h2>
+        <div class="badges">
+            <div class="badge">
+                <div class="badge-icon">💎</div>
+                <div class="badge-text">7 DIAS DE GARANTIA PARA TESTAR TUDO</div>
+            </div>
+            <div class="badge">
+                <div class="badge-icon">🔓</div>
+                <div class="badge-text">ACESSO IMEDIATO APÓS A COMPRA</div>
+            </div>
+            <div class="badge">
+                <div class="badge-icon">✔</div>
+                <div class="badge-text">AMBIENTE 100% SEGURO PARA SUA COMPRA</div>
+            </div>
+        </div>
+        <div class="guarantee-box">
+            <h3>GARANTIA INCONDICIONAL DE 7 DIAS</h3>
+            <p>Você entra na Wolf Academy, assiste as aulas, participa e aplica o conteúdo. Se em até 7 dias você sentir que não é para você, basta enviar uma mensagem e devolvemos 100% do seu dinheiro.</p>
+            <p style="margin-top: 18px; font-weight: 700; color: var(--gold-soft);">O risco é nosso. A mudança de vida é sua.</p>
+        </div>
+    </section>
+
+    <!-- OFERTA -->
+    <section id="oferta" class="section price-section">
+        <h2 class="section-title">OFERTA ESPECIAL PARA AS PRIMEIRAS TURMAS</h2>
+        <div class="price-box">
+            <p class="old-price">De R$ 497,00</p>
+            <p class="new-price">R$ 197</p>
+            <p class="price-tagline">TICKET DE ENTRADA PARA QUEM ESTÁ COMEÇANDO AGORA</p>
+            <p class="price-subtitle">Pagamento único, acesso vitalício às aulas e atualizações futuras.</p>
+            <a href="https://pay.kiwify.com.br/SEULINK" class="cta-button">GARANTIR MINHA VAGA AGORA</a>
+            <div class="urgency">
+                ⚠ ATENÇÃO: VAGAS LIMITADAS PARA ACOMPANHAMENTO PRÓXIMO. APÓS ESSE LOTE, O PREÇO SOBE.
+            </div>
+        </div>
+        <p class="secure-text">🔒 Pagamento 100% seguro via Kiwify.</p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section faq-section">
+        <h2 class="section-title">PERGUNTAS FREQUENTES</h2>
+        <div class="faq-item">
+            <h3>Quanto tempo dura a mentoria?</h3>
+            <p>A jornada estruturada tem 8 semanas, mas o acesso às aulas é vitalício. Você pode rever o conteúdo quantas vezes quiser.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Sou totalmente iniciante, faz sentido para mim?</h3>
+            <p>Sim. A Wolf Academy foi pensada para o cara que está começando do zero e quer construir base sólida em físico, mente e dinheiro.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Como recebo o acesso?</h3>
+            <p>Assim que o pagamento é aprovado na Kiwify, você recebe automaticamente um e‑mail com os dados de acesso à área de membros.</p>
+        </div>
+        <div class="faq-item">
+            <h3>E se eu não tiver tempo?</h3>
+            <p>As aulas são objetivas e você pode assistir quando quiser. Além disso, o método foi desenhado para caber na rotina de quem estuda e/ou trabalha.</p>
+        </div>
+        <div class="faq-item">
+            <h3>Vou realmente ganhar dinheiro?</h3>
+            <p>Você vai aprender caminhos reais para gerar renda online, mas o resultado depende da sua execução. Não é promessa mágica, é método somado à sua disciplina.</p>
+        </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section class="final-cta">
+        <h2>SAIR DA MEDIOCRIDADE É UMA DECISÃO.</h2>
+        <p>Você pode fechar essa página e continuar exatamente onde está ou pode dar o primeiro passo para construir o físico, a mente e a renda que você sabe que merece.</p>
+        <a href="#oferta" class="cta-button">ENTRAR NA WOLF ACADEMY AGORA</a>
+    </section>
+
+</body>
+</html>
